@@ -38,5 +38,12 @@
     "rugosity_opt7": "Hierro Galvanizado (0.15 mm)",
     "rugosity_opt8": "Hierro Forjado (0.046 mm)",
     "rugosity_opt9": "Acero Inoxidable (0.002 mm)",
-    "rugosity_opt10": "Acero Comercial (0.045 mm)"
+    "rugosity_opt10": "Acero Comercial (0.045 mm)",
+    "velocity_title": "Velocidad",
+    "renumber_title": "Número Reynolds",
+    "relative_rugosity_title": "Rugosidad Relativa",
+    "input_note": "Ingresar datos para calcular altura en el Punto B.",
+    "tank_a": "Tanque 1",
+    "tank_b": "Tanque 2",
+    "tank_pressure_label": "Presión del Tanque"
 }

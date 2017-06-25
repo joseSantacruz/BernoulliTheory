@@ -38,7 +38,12 @@
     "rugosity_opt7": "Galvanized Iron (0.15 mm)",
     "rugosity_opt8": "Wrought Iron (0.046 mm)",
     "rugosity_opt9": "Stainless Steel (0.002 mm)",
-    "rugosity_opt10": "Commercial Steel  (0.045 mm)"
-
-
+    "rugosity_opt10": "Commercial Steel  (0.045 mm)",
+    "velocity_title": "Velocity",
+    "renumber_title": "Reynolds Number",
+    "relative_rugosity_title": "Relative Rugosity",
+    "input_note": "Enter data to calculate height in Point B.",
+    "tank_a": "Tank 1",
+    "tank_b": "Tank 2",
+    "tank_pressure_label": "Tank Pressure"
 }

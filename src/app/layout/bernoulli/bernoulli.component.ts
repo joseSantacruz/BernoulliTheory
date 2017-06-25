@@ -1,4 +1,6 @@
+/* tslint:disable max-line-length */
 import {Component, OnInit} from '@angular/core';
+import * as _ from 'underscore';
 
 @Component({
     selector: 'app-bernoulli',
@@ -31,6 +33,14 @@ export class BernoulliComponent implements OnInit {
         return f;
     }
 
+    static returnFormat(value: any) {
+        if (_.isNaN(value)) {
+            return '-';
+        }
+
+        return value;
+    }
+
     constructor() {
     }
 
@@ -38,16 +48,16 @@ export class BernoulliComponent implements OnInit {
 
     }
 
-    velocity(): number {
-        return 4 * this.flow / (Math.PI * Math.pow(this.diameter, 2));
+    velocity() {
+        return BernoulliComponent.returnFormat(4 * this.flow / (Math.PI * Math.pow(this.diameter, 2)));
     }
 
     reNumber() {
-        return (this.velocity() * this.density * this.diameter) / this.viscosity;
+        return BernoulliComponent.returnFormat((this.velocity() * this.density * this.diameter) / this.viscosity);
     }
 
     relativeRugosity() {
-        return this.rugosity / this.diameter;
+        return BernoulliComponent.returnFormat(this.rugosity / this.diameter);
     }
 
     frictionFactor() {
@@ -60,18 +70,48 @@ export class BernoulliComponent implements OnInit {
         if (eD < 0) {
             return;
         }
-        return BernoulliComponent.colebrook(Re, eD);
+        return BernoulliComponent.returnFormat(BernoulliComponent.colebrook(Re, eD));
     }
 
     lossCargo() {
-        return (this.frictionFactor() * Math.pow(this.velocity(), 2) * this.pipeLength) / (2 * 9.81 * this.diameter);
+        return BernoulliComponent.returnFormat((this.frictionFactor() * Math.pow(this.velocity(), 2) * this.pipeLength) / (2 * 9.81 * this.diameter));
     }
 
     heightB() {
         const atmosphere = 101325;
         const pA = (this.openTank === 'A') ? this.pipePreasure : atmosphere;
         const pB = (this.openTank === 'B') ? this.pipePreasure : atmosphere;
-        return ((pA - pB) / (this.density * 9.81)) - this.lossCargo();
+        return BernoulliComponent.returnFormat(((pA - pB) / (this.density * 9.81)) - this.lossCargo());
+    }
+
+    progressValue() {
+        let current = 0;
+
+        if (this.velocity() !== '-') {
+            current++;
+        }
+
+        if (this.reNumber() !== '-') {
+            current++;
+        }
+
+        if (this.relativeRugosity() !== '-') {
+            current++;
+        }
+
+        if (this.frictionFactor() !== '-') {
+            current++;
+        }
+
+        if (this.lossCargo() !== '-') {
+            current++;
+        }
+
+        if (this.heightB() !== '-') {
+            current++;
+        }
+
+        return current / 6 * 100;
     }
 
 }

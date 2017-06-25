@@ -1,34 +1,48 @@
-<h2 class="text-muted">{{ 'bernoulli' | translate }} <small>{{ 'fluids_theory' | translate }}</small></h2>
+<h2 class="text-muted">{{ 'bernoulli' | translate }}
+    <small>{{ 'fluids_theory' | translate }}</small>
+</h2>
+<div class="row">
+    <div class="hidden-sm col-md-3"></div>
+    <div class="col-sm-12 col-md-6">
+        <img class="img-fluid mx-auto d-block" src="assets/images/imageFlow.png"
+             alt="Random first slide" width="100%">
+    </div>
+    <div class="hidden-sm col-md-3"></div>
+</div>
 <div class="row">
     <div class="col-sm-12 col-md-6">
         <div class="card mb-3">
             <div class="card-header">{{ 'input_data' | translate }}</div>
             <div class="card-block">
-                <form role="form" >
+                <form role="form">
+                    <p class="text-muted"><i class="fa fa-exclamation-circle"></i> {{ 'input_note' |
+                        translate }}
+                    </p>
                     <div class="form-group input-group">
-                        <input [(ngModel)]="pipeLength" name="inputPipeLength" type="number" class="form-control" placeholder="{{ 'pipe_length' | translate }}">
+                        <input [(ngModel)]="pipeLength" name="inputPipeLength" type="number"
+                               class="form-control" placeholder="{{ 'pipe_length' | translate }}">
                         <span class="input-group-addon">m</span>
                     </div>
                     <div class="form-group input-group">
-                        <input [(ngModel)]="density" name="inputDensity" type="number" class="form-control" placeholder="{{ 'density' | translate }}">
+                        <input [(ngModel)]="density" name="inputDensity" type="number"
+                               class="form-control" placeholder="{{ 'density' | translate }}">
                         <span class="input-group-addon">kg/m3</span>
                     </div>
                     <div class="form-group input-group">
-                        <input [(ngModel)]="viscosity" name="inputViscosity" type="number" class="form-control" placeholder="{{ 'viscosity' | translate }}">
+                        <input [(ngModel)]="viscosity" name="inputViscosity" type="number"
+                               class="form-control" placeholder="{{ 'viscosity' | translate }}">
                         <span class="input-group-addon">kg/m*s</span>
                     </div>
                     <div class="form-group input-group">
-                        <input [(ngModel)]="diameter" name="inputDiameter" type="number" class="form-control" placeholder="{{ 'diameter' | translate }}">
+                        <input [(ngModel)]="diameter" name="inputDiameter" type="number"
+                               class="form-control" placeholder="{{ 'diameter' | translate }}">
                         <span class="input-group-addon">m</span>
                     </div>
                     <div class="form-group input-group">
-                        <input [(ngModel)]="flow" name="inputFlow" type="number" class="form-control" placeholder="{{ 'flow' | translate }}">
+                        <input [(ngModel)]="flow" name="inputFlow" type="number"
+                               class="form-control" placeholder="{{ 'flow' | translate }}">
                         <span class="input-group-addon">m3/s</span>
                     </div>
-                    <!--<div class="form-group input-group">
-                        <input [(ngModel)]="rugosity" name="inputRugosity" type="number" class="form-control" placeholder="{{ 'rugosity' | translate }}">
-                        <span class="input-group-addon">m</span>
-                    </div>-->
                     <div class="form-group">
                         <label>{{ 'rugosity' | translate }}</label>
                         <select [(ngModel)]="rugosity" name="inputRugosity" class="form-control">
@@ -44,18 +58,20 @@
                             <option value="0.000045">{{ 'rugosity_opt10' | translate }}</option>
                         </select>
                     </div>
-                    <p class="text-muted"><i class="fa fa-exclamation-circle"></i> {{ 'close_tank_note' | translate }}
+                    <p class="text-muted"><i class="fa fa-exclamation-circle"></i> {{
+                        'close_tank_note' | translate }}
                     </p>
-                    <div [(ngModel)]="openTank" ngbRadioGroup name="radioOpenTank" >
+                    <div [(ngModel)]="openTank" ngbRadioGroup name="radioOpenTank">
                         <label class="btn btn-primary">
-                            <input type="radio" value="A"> Tanque A
+                            <input type="radio" value="A"> {{ 'tank_a' | translate }}
                         </label>
                         <label class="btn btn-primary">
-                            <input type="radio" value="B"> Tanque B
+                            <input type="radio" value="B"> {{ 'tank_b' | translate }}
                         </label>
                     </div>
                     <div class="form-group input-group">
-                        <input [(ngModel)]="pipePreasure" name="inputPipePreasure" type="number" class="form-control" placeholder="Presion del Tanque {{openTank}}">
+                        <input [(ngModel)]="pipePreasure" name="inputPipePreasure" type="number"
+                               class="form-control" placeholder="{{ 'tank_pressure_label' | translate }} {{(openTank === 'A'? 1 : 2)}}">
                         <span class="input-group-addon">Pa</span>
                     </div>
                 </form>
@@ -66,88 +82,127 @@
         <div class="card mb-3">
             <div class="card-header">{{ 'output_data' | translate }}</div>
             <div class="card-block">
+                <p>
+                    <ngb-progressbar type="success" [value]="progressValue()"></ngb-progressbar>
+                </p>
                 <ul class="timeline">
                     <li>
-                        <div class="timeline-badge" style="background-color: #0344be !important;"><i class="fa fa-tint"></i>
+                        <div class="timeline-badge" style="background-color: #f6f600 !important;"><i
+                            class="fa fa-bolt"></i>
                         </div>
-                        <div class="timeline-panel">
+                        <div
+                            class="timeline-panel {{ velocity() !== '-' ? 'timeline-succeed' : '' }}">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">Velocidad</h4>
-                                <p><small class="text-muted"><i class="fa fa-bookmark"></i> Velocidad</small>
+                                <h4 class="timeline-title">{{ 'velocity_title' | translate }}
+                                    (m/s)</h4>
+                                <p>
+                                    <small class="text-muted"><i class="fa fa-bookmark"></i> 4Q/&pi;*D2
+                                    </small>
                                 </p>
                             </div>
                             <div class="timeline-body">
-                                <h2>{{velocity() | number : '1.3-5'}}</h2>
+                                <h2>{{velocity() === '-' ? '-' : (velocity() | number :
+                                    '1.3-5')}}</h2>
                             </div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-badge warning"><i class="fa fa-level-down"></i>
+                        <div class="timeline-badge" style="background-color: #109867 !important;"><i
+                            class="fa fa-hashtag"></i>
                         </div>
-                        <div class="timeline-panel">
+                        <div
+                            class="timeline-panel {{ reNumber() !== '-' ? 'timeline-succeed' : '' }}">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">Re Number</h4>
-                                <p><small class="text-muted"><i class="fa fa-bookmark"></i> Re Number</small>
+                                <h4 class="timeline-title">{{ 'renumber_title' | translate }}</h4>
+                                <p>
+                                    <small class="text-muted"><i class="fa fa-bookmark"></i> v*&delta;*D/&mu;
+                                    </small>
                                 </p>
                             </div>
                             <div class="timeline-body">
-                                <h2>{{reNumber() | number : '1.3-5'}}</h2>
+                                <h2>{{reNumber() === '-' ? '-' : (reNumber() | number :
+                                    '1.3-5')}}</h2>
                             </div>
                         </div>
                     </li>
                     <li>
-                        <div class="timeline-badge" style="background-color: #0344be !important;"><i class="fa fa-tint"></i>
+                        <div class="timeline-badge" style="background-color: #ea5d00 !important;"><i
+                            class="fa fa-cog"></i>
                         </div>
-                        <div class="timeline-panel">
+                        <div
+                            class="timeline-panel {{ relativeRugosity() !== '-' ? 'timeline-succeed' : '' }}">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">Rugosidad Relativa</h4>
-                                <p><small class="text-muted"><i class="fa fa-bookmark"></i> Rugosidad Relativa</small>
+                                <h4 class="timeline-title">{{ 'relative_rugosity_title' | translate
+                                    }}</h4>
+                                <p>
+                                    <small class="text-muted"><i class="fa fa-bookmark"></i>
+                                        &epsilon;/D
+                                    </small>
                                 </p>
                             </div>
                             <div class="timeline-body">
-                                <h2>{{relativeRugosity() | number : '1.3-5'}}</h2>
+                                <h2>{{relativeRugosity() === '-' ? '-' : (relativeRugosity() |
+                                    number : '1.3-5')}}</h2>
                             </div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-badge" style="background-color: #0344be !important;"><i class="fa fa-tint"></i>
+                        <div class="timeline-badge" style="background-color: #0344be !important;"><i
+                            class="fa fa-tint"></i>
                         </div>
-                        <div class="timeline-panel">
+                        <div
+                            class="timeline-panel {{ frictionFactor() !== '-' ? 'timeline-succeed' : '' }}">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">{{ 'friction_factor_title' | translate }}</h4>
-                                <p><small class="text-muted"><i class="fa fa-bookmark"></i> {{ 'friction_factor_note' | translate }}</small>
+                                <h4 class="timeline-title">{{ 'friction_factor_title' | translate
+                                    }}</h4>
+                                <p>
+                                    <small class="text-muted"><i class="fa fa-bookmark"></i> {{
+                                        'friction_factor_note' | translate }}
+                                    </small>
                                 </p>
                             </div>
                             <div class="timeline-body">
-                                <h2>{{frictionFactor() | number : '1.3-5'}}</h2>
+                                <h2>{{frictionFactor() === '-' ? '-' : (frictionFactor() | number :
+                                    '1.3-5')}}</h2>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="timeline-badge warning"><i class="fa fa-level-down"></i>
                         </div>
-                        <div class="timeline-panel">
+                        <div
+                            class="timeline-panel {{ lossCargo() !== '-' ? 'timeline-succeed' : '' }}">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">{{ 'loss_cargo' | translate }}</h4>
-                                <p><small class="text-muted"><i class="fa fa-bookmark"></i> f*v2*l/2g*D</small>
+                                <h4 class="timeline-title">{{ 'loss_cargo' | translate }} (m)</h4>
+                                <p>
+                                    <small class="text-muted"><i class="fa fa-bookmark"></i>
+                                        f*v2*l/2g*D
+                                    </small>
                                 </p>
                             </div>
                             <div class="timeline-body">
-                                <h2>{{lossCargo() | number : '1.3-5'}}</h2>
+                                <h2>{{lossCargo() === '-' ? '-' : (lossCargo() | number :
+                                    '1.3-5')}}</h2>
                             </div>
                         </div>
                     </li>
                     <li class="timeline-inverted">
-                        <div class="timeline-badge" style="background-color: #03af18 !important;"><i class="fa fa-check"></i>
+                        <div class="timeline-badge" style="background-color: #03af18 !important;"><i
+                            class="fa fa-check"></i>
                         </div>
-                        <div class="timeline-panel">
+                        <div
+                            class="timeline-panel {{ heightB() !== '-' ? 'timeline-succeed' : '' }}">
                             <div class="timeline-heading">
-                                <h4 class="timeline-title">{{ 'height_pointb' | translate }}</h4>
-                                <p><small class="text-muted"><i class="fa fa-bookmark"></i> pa-pb/&delta;*g</small>
+                                <h4 class="timeline-title">{{ 'height_pointb' | translate }}
+                                    (m)</h4>
+                                <p>
+                                    <small class="text-muted"><i class="fa fa-bookmark"></i> pa-pb/&delta;*g
+                                    </small>
                                 </p>
                             </div>
                             <div class="timeline-body">
-                                <h2>{{heightB() | number : '1.3-5'}}</h2>
+                                <h2>{{heightB() === '-' ? '-' : (heightB() | number :
+                                    '1.3-5')}}</h2>
                             </div>
                         </div>
                     </li>
