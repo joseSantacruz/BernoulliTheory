@@ -11,5 +11,34 @@
     "blankpage": "Blank Page",
     "moretheme": "More Themes",
     "downloadNow": "Download Now",
-    "language": "Language"
+
+    "language": "Language",
+    "bernoulli": "Hydrodynamics",
+    "title": "Unit Operation 1",
+    "fluids_theory": "Flow in Pipes or Ducts",
+    "input_data": "Input Data",
+    "pipe_length": "Length of Pipe",
+    "density": "Density",
+    "viscosity": "Viscosity",
+    "diameter": "Diameter",
+    "flow": "Flow",
+    "output_data": "Results",
+    "friction_factor_title": "Friction Factor",
+    "friction_factor_note": "Based Moody Diagram.",
+    "loss_cargo": "Loss of Cargo",
+    "height_pointb": "Height at Point B",
+    "close_tank_note": "Choose close tank.",
+    "rugosity": "Material Roughness",
+    "rugosity_opt1": "Glass, plastic (0 mm)",
+    "rugosity_opt2": "Concrete (0.9 mm)",
+    "rugosity_opt3": "Wood, Stave (0.5 mm)",
+    "rugosity_opt4": "Rubber Smoothed (0.01 mm)",
+    "rugosity_opt5": "Copper or Brass Tubing (0.0015 mm)",
+    "rugosity_opt6": "Cast Iron (0.26 mm)",
+    "rugosity_opt7": "Galvanized Iron (0.15 mm)",
+    "rugosity_opt8": "Wrought Iron (0.046 mm)",
+    "rugosity_opt9": "Stainless Steel (0.002 mm)",
+    "rugosity_opt10": "Commercial Steel  (0.045 mm)"
+
+
 }
